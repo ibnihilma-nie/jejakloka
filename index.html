@@ -2,8 +2,9 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Jejak Loka - Belajar Aksara Nusantara</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jejak Loka - Galeri Desain Fitur (Font Rapi)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,569 +13,415 @@
     }
 
     body {
-      background: #E7DCC8; /* warm earthy background */
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      background: #E7DCC8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 32px 20px;
+      color: #2C2418;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      text-align: center;
+      color: #5E3A1C;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .sub {
+      text-align: center;
+      color: #7C5A3A;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 42px;
+      font-style: normal;
+    }
+
+    .grid {
       display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 16px;
     }
 
-    /* Mobile container */
-    .app-container {
-      max-width: 400px;
-      width: 100%;
-      height: 700px;
-      background: #FDF8F0; /* krem lembut */
-      border-radius: 48px 48px 32px 32px;
-      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.3);
+    /* Mockup ponsel */
+    .mockup-phone {
+      width: 350px;
+      background: #FDF8F0;
+      border-radius: 48px;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.3);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      backdrop-filter: blur(0px);
-      transition: all 0.2s ease;
+      transition: transform 0.2s ease;
+      border: 1px solid #F0E2D0;
+      font-family: 'Inter', sans-serif;
     }
 
-    /* Ornamen halus di background */
-    .app-container::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' opacity='0.08'%3E%3Cpath fill='%238B5A2B' d='M20,20 L30,15 L40,20 L35,30 L25,30 Z M70,70 L80,65 L90,70 L85,80 L75,80 Z'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      pointer-events: none;
+    .mockup-phone:hover {
+      transform: translateY(-6px);
     }
 
-    /* Header */
-    .header {
-      padding: 20px 24px 8px 24px;
+    .screen-header {
+      padding: 18px 20px 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-bottom: 1px solid rgba(139, 90, 43, 0.15);
+      border-bottom: 1px solid #F0E2D0;
     }
-    .logo h1 {
+
+    .screen-header .title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.6rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #8B5A2B, #D4A373);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
-    }
-    .logo p {
-      font-size: 0.7rem;
+      font-size: 1.1rem;
       color: #8B5A2B;
-      opacity: 0.7;
+      letter-spacing: -0.2px;
     }
-    .xp-bar-small {
+
+    .screen-header .xp-badge {
       background: #E3B7A0;
-      border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
       font-weight: 600;
-      color: #5E3A1C;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      color: #4A2E14;
     }
 
-    /* Main content scroll */
-    .main-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px 20px 8px 20px;
-      scroll-behavior: smooth;
-    }
-
-    /* Bottom navigation */
-    .bottom-nav {
-      background: #FFFBF5;
-      border-top: 1px solid #F0E4D0;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 16px 20px;
-      border-radius: 28px 28px 0 0;
-    }
-    .nav-item {
+    .screen-content {
+      padding: 20px;
+      min-height: 580px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.7rem;
-      color: #B8956E;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 500;
-    }
-    .nav-item.active {
-      color: #8B5A2B;
-      transform: translateY(-2px);
-    }
-    .nav-item span:first-child {
-      font-size: 1.5rem;
+      gap: 18px;
     }
 
-    /* Cards & UI Elements */
-    .card {
-      background: white;
-      border-radius: 28px;
-      padding: 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
-      border: 1px solid #F2E5D6;
-    }
+    /* Komponen UI */
     .map-preview {
       background: #F7F0E6;
-      border-radius: 20px;
-      padding: 12px;
+      border-radius: 28px;
+      padding: 14px;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
     }
+
     .island {
       background: #D4A373;
-      padding: 8px 12px;
+      padding: 6px 16px;
       border-radius: 40px;
       color: white;
+      font-size: 0.75rem;
       font-weight: 600;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: 0.1s;
+      font-family: 'Inter', sans-serif;
     }
+
     .island.locked {
       background: #C0B2A0;
-      opacity: 0.6;
+      opacity: 0.7;
     }
-    .dialog-box {
+
+    .dialog-bubble {
       background: #FEF5E8;
       border-radius: 24px;
       padding: 16px;
-      margin: 12px 0;
-      border-left: 6px solid #D4A373;
+      border-left: 5px solid #D4A373;
     }
-    .choice-btn {
+
+    .choice-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .choice {
       background: #EBDCCB;
-      border: none;
-      padding: 10px 16px;
+      padding: 8px 16px;
       border-radius: 40px;
-      margin: 8px 8px 0 0;
-      font-weight: 500;
+      font-size: 0.75rem;
+      font-weight: 600;
       color: #5E3A1C;
     }
+
     .daily-bg {
-      background: linear-gradient(145deg, #FFE8D4, #FFD9B5);
+      background: linear-gradient(135deg, #FFE2C1, #FFD3A5);
       border-radius: 32px;
-      padding: 24px;
+      padding: 22px 16px;
       text-align: center;
     }
-    .aksara-besar {
-      font-size: 3.8rem;
-      font-family: 'Noto Sans Javanese', 'Noto Sans Balinese', sans-serif;
-      letter-spacing: 8px;
+
+    .aksara-large {
+      font-family: 'Noto Sans Javanese', 'Noto Sans Balinese', 'Segoe UI', monospace;
+      font-size: 3.2rem;
+      margin: 12px 0 6px;
+      letter-spacing: 4px;
     }
+
     .keyboard-area {
       background: #F5EDE2;
       border-radius: 28px;
       padding: 16px;
     }
+
     .key-row {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 12px 0;
+      margin: 14px 0;
       justify-content: center;
     }
-    .key-btn {
-      background: #FFF;
-      border: 1px solid #DECBB4;
-      padding: 12px 14px;
+
+    .key {
+      background: white;
       border-radius: 18px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
       font-weight: 600;
       color: #6B4A2A;
-      cursor: pointer;
-      transition: 0.05s linear;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      font-family: 'Inter', monospace;
     }
-    .key-btn:active { transform: scale(0.96); background: #EBDCCB; }
+
     textarea {
-      width: 100%;
+      font-family: 'Inter', monospace;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .dict-item {
+      background: #FFF7EF;
       border-radius: 24px;
-      border: 1px solid #E2D3C0;
-      padding: 12px;
-      font-family: monospace;
-      font-size: 1rem;
-      background: white;
+      padding: 14px;
+      margin-bottom: 12px;
     }
-    .badge-list {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      background: #EEDCC8;
-      border-radius: 60px;
-      padding: 6px 14px;
-      font-size: 0.7rem;
-      font-weight: bold;
-    }
-    button {
-      background: #8B5A2B;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 40px;
-      font-weight: 600;
-    }
+
     .avatar {
-      width: 70px;
-      height: 70px;
+      width: 76px;
+      height: 76px;
       background: #D4A373;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: 2.4rem;
+      margin: 0 auto;
     }
+
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+
+    .badge {
+      background: #EEDCC8;
+      border-radius: 60px;
+      padding: 6px 14px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #4A2E14;
+    }
+
     .progress-bar {
       background: #EED7C0;
       border-radius: 20px;
-      height: 12px;
+      height: 8px;
       overflow: hidden;
     }
+
     .progress-fill {
       background: #6B8E6B;
-      width: 0%;
+      width: 60%;
       height: 100%;
-      border-radius: 20px;
+    }
+
+    hr {
+      margin: 12px 0;
+      border: none;
+      height: 1px;
+      background: #F0E2D0;
+    }
+
+    .feature-tag {
+      background: #8B5A2B18;
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 8px 6px;
+      margin-top: 8px;
+      border-radius: 24px;
+      color: #7B4A28;
+    }
+
+    button, .btn-mock {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+    }
+
+    /* Perbaikan teks umum */
+    p, span, div:not(.special) {
+      font-family: 'Inter', sans-serif;
+    }
+
+    h3, h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+
+    .small-text {
+      font-size: 0.7rem;
+      line-height: 1.4;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="app-container" id="app">
-  <div class="header">
-    <div class="logo">
-      <h1>Jejak Loka</h1>
-      <p>lestari aksara, jelajahi budaya</p>
-    </div>
-    <div class="xp-bar-small" id="xpHeader">⭐ 0 XP | Lv.1</div>
-  </div>
+<div class="container">
+  <h1>🍃 Jejak Loka — Galeri Desain Fitur</h1>
+  <div class="sub">Tampilan antarmuka untuk Story Adventure, Daily Word, Keyboard, Kamus, Profil & Gamifikasi | Tipografi rapi & modern</div>
 
-  <div class="main-content" id="mainContent">
-    <!-- konten dinamis via js -->
-  </div>
-
-  <div class="bottom-nav">
-    <div class="nav-item" data-page="story">🌏<span>Petualangan</span></div>
-    <div class="nav-item" data-page="daily">📖<span>Kata Harian</span></div>
-    <div class="nav-item" data-page="keyboard">⌨️<span>Aksara</span></div>
-    <div class="nav-item" data-page="dictionary">📚<span>Kamus</span></div>
-    <div class="nav-item" data-page="profile">👤<span>Profil</span></div>
-  </div>
-</div>
-
-<script>
-  // ---------- GAME STATE ----------
-  let user = {
-    xp: 0,
-    level: 1,
-    unlockedStories: ["sumatra"],
-    badges: ["Penjelajah Pemula"],
-    avatar: "🧑🎨",
-    dailyStreak: 1,
-    learnedWords: ["aksara", "bumi", "candi"]
-  };
-
-  // contoh kamus data
-  const dictionaryData = [
-    { word: "Aksara", latin: "Aksara", aksara: "ꦲꦏ꧀ꦱꦫ", arti: "Sistem tulisan tradisional", example: "Aksara Jawa digunakan di masa lalu." },
-    { word: "Bumi", latin: "Bumi", aksara: "ꦧꦸꦩꦶ", arti: "Tanah, dunia", example: "Bumi Nusantara kaya budaya." },
-    { word: "Candi", latin: "Candi", aksara: "ꦕꦤ꧀ꦢꦶ", arti: "Bangunan bersejarah", example: "Candi Borobudur megah." },
-    { word: "Ratu", latin: "Ratu", aksara: "ꦫꦠꦸ", arti: "Raja perempuan", example: "Ratu Kencono wungu." },
-    { word: "Pustaka", latin: "Pustaka", aksara: "ꦥꦸꦱ꧀ꦠꦏ", arti: "Buku atau kitab", example: "Pustaka lontar berisi aksara." }
-  ];
-
-  // mapping konversi latin ke aksara jawa sederhana (demo)
-  const latinToAksaraMap = {
-    'a':'ꦲ', 'b':'ꦧ', 'c':'ꦕ', 'd':'ꦢ', 'e':'ꦌ', 'f':'ꦥ꦳', 'g':'ꦒ', 'h':'ꦲ', 'i':'ꦆ', 'j':'ꦗ', 'k':'ꦏ', 'l':'ꦭ', 'm':'ꦩ', 'n':'ꦤ', 'o':'ꦎ', 'p':'ꦥ', 'q':'ꦏ', 'r':'ꦫ', 's':'ꦱ', 't':'ꦠ', 'u':'ꦈ', 'v':'ꦮ꦳', 'w':'ꦮ', 'x':'ꦏ꧀ꦱ', 'y':'ꦪ', 'z':'ꦗ'
-  };
-  function convertToAksara(text) {
-    let result = "";
-    for(let char of text.toLowerCase()) {
-      if(latinToAksaraMap[char]) result += latinToAksaraMap[char];
-      else result += char;
-    }
-    return result;
-  }
-
-  // fungsi untuk menambah XP dan update level
-  function addXP(amount) {
-    user.xp += amount;
-    let newLevel = Math.floor(user.xp / 500) + 1;
-    if(newLevel > user.level) {
-      user.level = newLevel;
-      alert(`✨ Selamat! Level naik ke ${user.level} ✨`);
-      if(user.level === 3 && !user.badges.includes("Penjaga Aksara")) {
-        user.badges.push("Penjaga Aksara");
-        alert("🏅 Badge baru: Penjaga Aksara!");
-      }
-    }
-    user.level = newLevel;
-    updateUI();
-  }
-
-  function updateUI() {
-    document.getElementById("xpHeader").innerHTML = `⭐ ${user.xp} XP | Lv.${user.level}`;
-    renderCurrentPage();
-  }
-
-  // state halaman aktif
-  let currentPage = "story";
-
-  // ----- RENDER SETIAP HALAMAN -----
-  function renderStory() {
-    return `
-      <div class="card">
-        <h3 style="color:#8B5A2B">🌏 Peta Nusantara</h3>
+  <div class="grid">
+    <!-- 1. Story Adventure -->
+    <div class="mockup-phone">
+      <div class="screen-header">
+        <span class="title">🌏 Petualangan</span>
+        <span class="xp-badge">⭐ 340 XP | Lv.2</span>
+      </div>
+      <div class="screen-content">
         <div class="map-preview">
-          <div class="island" data-story="sumatra">Sumatra ✅</div>
-          <div class="island locked" data-story="java">Jawa 🔒</div>
-          <div class="island locked" data-story="bali">Bali 🔒</div>
+          <div class="island">Sumatra ✅</div>
+          <div class="island locked">Jawa 🔒</div>
+          <div class="island locked">Bali 🔒</div>
         </div>
-        <div id="storyDialog" class="dialog-box">
-          <p><strong>📜 Cerita Rakyat Sumatra: Malin Kundang</strong></p>
-          <p>Ibu Malin Kundang menangis melihat anaknya durhaka. Tiba-tiba badai datang. Apa yang akan kamu lakukan sebagai penolong?</p>
-          <button class="choice-btn" data-choice="1">🔮 Menolong Ibu dengan aksara suci</button>
-          <button class="choice-btn" data-choice="2">🌊 Berlari menghindari badai</button>
-        </div>
-        <p>✨ Progress: <strong>Sumatra (level 1/5)</strong></p>
-        <div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div>
-      </div>
-    `;
-  }
-
-  function handleStoryChoice(choice) {
-    if(choice === "1") {
-      addXP(80);
-      alert("✅ Pilihan bijak! Kamu mendapat 80 XP dan aksara 'Ba' dibuka.");
-      user.badges.push("Pemurah Hati");
-    } else {
-      addXP(20);
-      alert("😔 Kurang tepat, tapi kamu tetap belajar 20 XP.");
-    }
-    renderCurrentPage();
-  }
-
-  function renderDaily() {
-    const words = ["Rindu", "Bahagia", "Asri", "Loka"];
-    const randomWord = words[Math.floor(Math.random()*words.length)];
-    const aksaraEx = convertToAksara(randomWord);
-    return `
-      <div class="daily-bg" style="background:linear-gradient(125deg,#FDE5C2,#F7D9B0);">
-        <p style="letter-spacing:2px; color:#7C5633;">✨ KATA HARI INI ✨</p>
-        <div class="aksara-besar" style="font-size:3rem; margin:12px 0">${aksaraEx}</div>
-        <h2 style="color:#6B4A2A;">${randomWord}</h2>
-        <p style="font-style:italic; margin:12px 0">“${randomWord} adalah napas yang menghidupkan aksara.”</p>
-        <button id="shareDailyBtn" style="background:#8B5A2B; margin-top:8px;">📤 Bagikan ke Medsos</button>
-      </div>
-      <div class="card" style="margin-top:12px">
-        <p>🌤️ Latar: senja di pulau Jawa. Sentuhan budaya menenangkan jiwa.</p>
-      </div>
-    `;
-  }
-
-  function renderKeyboard() {
-    return `
-      <div class="keyboard-area">
-        <h3>⌨️ Keyboard Aksara (demo konversi)</h3>
-        <textarea id="inputLatin" rows="3" placeholder="Ketik latin... contoh: halo nusantara"></textarea>
-        <div class="key-row">
-          ${['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'].map(l => `<div class="key-btn" data-char="${l}">${l}</div>`).join('')}
+        <div class="dialog-bubble">
+          <strong style="font-family: 'Plus Jakarta Sans';">📖 Malin Kundang · Sumatra</strong>
+          <p style="margin-top: 8px; font-size: 0.85rem;">"Ibu, mengapa kau tinggalkan aku?" suara Malin menghilang ditelan ombak. Kamu menemukan sebuah aksara kuno.</p>
+          <div class="choice-group">
+            <div class="choice">🔮 Baca aksara</div>
+            <div class="choice">🌊 Selamatkan nelayan</div>
+          </div>
         </div>
         <div>
-          <p><strong>Hasil Aksara:</strong></p>
-          <div id="aksaraOutput" style="background:white; border-radius:20px; padding:12px; font-size:1.8rem; font-family: 'Noto Sans Javanese'; min-height:70px;"></div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 500;"><span>Progress pulau</span><span>30%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div>
         </div>
-        <button id="copyAksaraBtn" style="margin-top:12px;">📋 Salin Aksara</button>
-        <p style="font-size:12px; margin-top:12px;">✨ Setiap menekan tombol huruf atau mengetik akan otomatis konversi.</p>
+        <div class="feature-tag">✨ Cerita rakyat interaktif + unlock aksara baru</div>
       </div>
-    `;
-  }
+    </div>
 
-  function attachKeyboardEvents() {
-    const input = document.getElementById('inputLatin');
-    const outputDiv = document.getElementById('aksaraOutput');
-    function updateConvert() {
-      if(input) {
-        let val = input.value;
-        outputDiv.innerText = convertToAksara(val) || "ᬓᭂᬢᬶᬓ᭄...";
-        // tambah XP sedikit saat mengetik (dibatasi)
-      }
-    }
-    if(input) {
-      input.addEventListener('input', updateConvert);
-      updateConvert();
-    }
-    document.querySelectorAll('.key-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        let char = btn.getAttribute('data-char');
-        if(input) {
-          input.value += char;
-          updateConvert();
-          addXP(1); // tiap klik tombol mendapat 1 XP
-        }
-      });
-    });
-    const copyBtn = document.getElementById('copyAksaraBtn');
-    if(copyBtn) {
-      copyBtn.addEventListener('click', () => {
-        const aksaraText = document.getElementById('aksaraOutput').innerText;
-        navigator.clipboard.writeText(aksaraText);
-        alert("Aksara tersalin! Bagikan ke media sosialmu ✨");
-        addXP(5);
-      });
-    }
-  }
-
-  function renderDictionary() {
-    return `
-      <div class="card">
-        <input type="text" id="searchDict" placeholder="🔍 Cari kata (contoh: candi, aksara)" style="width:100%; padding:12px; border-radius:30px; border:1px solid #E2D3C0;">
-        <div id="dictResults" style="margin-top:16px;">
-          ${dictionaryData.map(item => `
-            <div style="background:#FFF7EF; border-radius:24px; margin-bottom:12px; padding:12px;">
-              <div style="font-size:2rem; font-family: monospace;">${item.aksara}</div>
-              <b>${item.word}</b> - ${item.arti}<br>
-              <span style="font-size:13px;">📖 ${item.example}</span>
-            </div>
-          `).join('')}
+    <!-- 2. Daily Word (Estetik) -->
+    <div class="mockup-phone">
+      <div class="screen-header">
+        <span class="title">📖 Kata Harian</span>
+        <span class="xp-badge">⭐ 340 XP</span>
+      </div>
+      <div class="screen-content">
+        <div class="daily-bg" style="background: linear-gradient(145deg, #FFDDB7, #FFCD91);">
+          <div style="font-size: 0.7rem; font-weight: 600; letter-spacing: 1px;">✨ KATA UNTUK HARI INI ✨</div>
+          <div class="aksara-large">ꦫꦶꦤ꧀ꦢꦸ</div>
+          <h3 style="color:#6B4A2A; font-size: 1.5rem; margin-top: 4px;">Rindu</h3>
+          <p style="font-size: 0.8rem; margin-top: 10px; font-style: italic;">"Rindu adalah aksara yang tak pernah usai ditulis."</p>
+          <div style="display: flex; gap: 14px; justify-content: center; margin-top: 18px;">
+            <span style="background: #8B5A2B; color: white; padding: 6px 16px; border-radius: 40px; font-size: 0.7rem; font-weight: 600;">🔊 Dengar</span>
+            <span style="background: #8B5A2B; color: white; padding: 6px 16px; border-radius: 40px; font-size: 0.7rem; font-weight: 600;">📤 Share</span>
+          </div>
         </div>
-      </div>
-    `;
-  }
-
-  function attachDictionarySearch() {
-    const searchInput = document.getElementById('searchDict');
-    if(searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
-        const filtered = dictionaryData.filter(item => item.word.toLowerCase().includes(term) || item.arti.toLowerCase().includes(term));
-        const container = document.getElementById('dictResults');
-        if(container) {
-          container.innerHTML = filtered.map(item => `
-            <div style="background:#FFF7EF; border-radius:24px; margin-bottom:12px; padding:12px;">
-              <div style="font-size:2rem;">${item.aksara}</div>
-              <b>${item.word}</b> - ${item.arti}<br>
-              <span>📖 ${item.example}</span>
-            </div>
-          `).join('');
-          if(filtered.length === 0) container.innerHTML = "<p>Tidak ditemukan, coba kata lain.</p>";
-        }
-      });
-    }
-  }
-
-  function renderProfile() {
-    const xpNeeded = (user.level * 500) - user.xp;
-    const progressPercent = (user.xp % 500) / 500 * 100;
-    return `
-      <div class="card" style="text-align:center;">
-        <div class="avatar" style="margin:0 auto;">${user.avatar}</div>
-        <h3>Pejuang Aksara</h3>
-        <p>Level ${user.level} • ${user.xp} / ${user.level*500} XP</p>
-        <div class="progress-bar"><div class="progress-fill" style="width:${progressPercent}%"></div></div>
-        <p style="margin-top:12px;">🎖️ Badge:</p>
-        <div class="badge-list">
-          ${user.badges.map(b => `<span class="badge">🏅 ${b}</span>`).join('')}
+        <div style="background: #F9F0E4; border-radius: 24px; padding: 12px; text-align: center; font-size: 0.75rem; font-weight: 500;">
+          🌅 Latar: Senja di pesisir Jawa
         </div>
-        <hr style="margin:16px 0">
-        <p>📖 Kata dikuasai: ${user.learnedWords.length} kata</p>
-        <p>🔥 Streak harian: ${user.dailyStreak} hari</p>
-        <button id="resetStreakBtn" style="background:#C2A27F;">Klaim hadiah harian</button>
+        <div class="feature-tag">🎨 Background dinamis (senja/hujan) + quote emosional</div>
       </div>
-    `;
-  }
+    </div>
 
-  function attachProfileEvents() {
-    const resetBtn = document.getElementById('resetStreakBtn');
-    if(resetBtn) {
-      resetBtn.addEventListener('click', () => {
-        addXP(30);
-        user.dailyStreak++;
-        alert(`Streak +1 hari! Dapat 30 XP. Total streak: ${user.dailyStreak}`);
-        renderCurrentPage();
-      });
-    }
-  }
+    <!-- 3. Keyboard Aksara -->
+    <div class="mockup-phone">
+      <div class="screen-header">
+        <span class="title">⌨️ Keyboard Aksara</span>
+        <span class="xp-badge">Auto-convert</span>
+      </div>
+      <div class="screen-content">
+        <div class="keyboard-area">
+          <textarea rows="2" placeholder="Ketik latin... contoh: cinta budaya" style="width:100%; border-radius: 20px; border: none; padding: 12px; font-size: 0.85rem; background: white;">cinta budaya</textarea>
+          <div style="background: white; border-radius: 20px; padding: 12px; margin-top: 12px; font-family: 'Noto Sans Javanese', monospace; font-size: 1.3rem; text-align: center;">ꦕꦶꦤ꧀ꦠꦨꦸꦢꦪ</div>
+          <div class="key-row">
+            <div class="key">ha</div><div class="key">na</div><div class="key">ca</div><div class="key">ra</div><div class="key">ka</div>
+            <div class="key">da</div><div class="key">ta</div><div class="key">sa</div><div class="key">wa</div><div class="key">la</div>
+          </div>
+          <div style="display: flex; gap: 12px; margin-top: 12px;">
+            <span style="background: #8B5A2B; color:white; padding: 8px; border-radius: 40px; font-size: 0.7rem; font-weight: 600; text-align:center; flex:1;">🌐 Ganti aksara</span>
+            <span style="background: #8B5A2B; color:white; padding: 8px; border-radius: 40px; font-size: 0.7rem; font-weight: 600; text-align:center; flex:1;">📋 Salin</span>
+          </div>
+        </div>
+        <div class="feature-tag">⌨️ Ketik latin ➜ aksara Nusantara, siap pakai di medsos</div>
+      </div>
+    </div>
 
-  // Global render
-  function renderCurrentPage() {
-    const contentDiv = document.getElementById("mainContent");
-    if(currentPage === "story") {
-      contentDiv.innerHTML = renderStory();
-      // attach event untuk pilihan cerita
-      document.querySelectorAll('.choice-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const choice = btn.getAttribute('data-choice');
-          handleStoryChoice(choice);
-        });
-      });
-      // tombol pulau
-      document.querySelectorAll('.island[data-story]').forEach(el => {
-        el.addEventListener('click', (e) => {
-          if(el.classList.contains('locked')) alert("Selesaikan Sumatra dulu untuk membuka pulau berikutnya!");
-          else alert("Kamu sudah menjelajahi Sumatra. Cerita selanjutnya segera hadir!");
-        });
-      });
-    } 
-    else if(currentPage === "daily") {
-      contentDiv.innerHTML = renderDaily();
-      const shareBtn = document.getElementById('shareDailyBtn');
-      if(shareBtn) shareBtn.onclick = () => { alert("✨ Kartu aksara siap dibagikan ke Instagram/TikTok! +15 XP"); addXP(15); };
-    }
-    else if(currentPage === "keyboard") {
-      contentDiv.innerHTML = renderKeyboard();
-      attachKeyboardEvents();
-    }
-    else if(currentPage === "dictionary") {
-      contentDiv.innerHTML = renderDictionary();
-      attachDictionarySearch();
-    }
-    else if(currentPage === "profile") {
-      contentDiv.innerHTML = renderProfile();
-      attachProfileEvents();
-    }
-  }
+    <!-- 4. Kamus Aksara -->
+    <div class="mockup-phone">
+      <div class="screen-header">
+        <span class="title">📚 Kamus Aksara</span>
+        <span class="xp-badge">48 kata</span>
+      </div>
+      <div class="screen-content">
+        <div style="background: #F2E5D6; border-radius: 60px; padding: 8px 18px; display: flex; gap: 8px; align-items: center;">
+          <span>🔍</span><input type="text" placeholder="Cari aksara, contoh: candi" style="background: none; border: none; width: 100%; outline: none; font-family: 'Inter'; font-size: 0.85rem;">
+        </div>
+        <div class="dict-item">
+          <div style="font-size: 1.8rem; font-family: 'Noto Sans Javanese', monospace;">ꦕꦤ꧀ꦢꦶ</div>
+          <div style="font-weight: 700; font-size: 1rem; margin: 4px 0 2px;">Candi</div>
+          <p style="font-size: 0.75rem;">Bangunan suci peninggalan Hindu-Buddha</p>
+          <span class="small-text" style="display: block; margin-top: 6px;">📖 Contoh: Candi Borobudur penuh aksara.</span>
+        </div>
+        <div class="dict-item">
+          <div style="font-size: 1.8rem; font-family: 'Noto Sans Javanese', monospace;">ꦄꦏ꧀ꦱꦫ</div>
+          <div style="font-weight: 700; font-size: 1rem;">Aksara</div>
+          <p style="font-size: 0.75rem;">Sistem tulisan tradisional Nusantara</p>
+          <span class="small-text">📖 Contoh: Aksara Jawa digunakan di lontar.</span>
+        </div>
+        <div class="feature-tag">📖 Pencarian cepat + contoh kalimat & bookmark</div>
+      </div>
+    </div>
 
-  // navigasi
-  function setActivePage(page) {
-    currentPage = page;
-    document.querySelectorAll('.nav-item').forEach(item => {
-      if(item.getAttribute('data-page') === page) item.classList.add('active');
-      else item.classList.remove('active');
-    });
-    renderCurrentPage();
-  }
+    <!-- 5. Profil & Gamifikasi -->
+    <div class="mockup-phone">
+      <div class="screen-header">
+        <span class="title">👤 Profil Lestari</span>
+        <span class="xp-badge">⭐ 340 XP | Lv.2</span>
+      </div>
+      <div class="screen-content">
+        <div class="avatar">🧑‍🎨</div>
+        <div style="text-align: center; font-weight: 700; font-size: 1.1rem; margin-top: 4px;">Kira Aksarani</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; font-weight: 500; margin-top: 4px;"><span>340 / 500 XP</span><span>Level 2 → 3</span></div>
+        <div class="badge-row">
+          <div class="badge">🏅 Penjelajah Pemula</div>
+          <div class="badge">🏅 Pengumpul Aksara</div>
+          <div class="badge">🏅 Duta Loka</div>
+        </div>
+        <hr>
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 500;">
+          <span>🔥 Streak: 7 hari</span>
+          <span>📖 24 kata dikuasai</span>
+        </div>
+        <div style="background: #EBDCCB; border-radius: 24px; padding: 12px; margin-top: 6px; font-size: 0.75rem; font-weight: 500;">
+          ✨ Tantangan hari ini: tulis 3 kata pakai keyboard aksara → +30 XP
+        </div>
+        <div class="feature-tag">🎮 Avatar, badge, XP bar, streak & challenge harian</div>
+      </div>
+    </div>
+  </div>
 
-  // event nav
-  document.querySelectorAll('.nav-item').forEach(nav => {
-    nav.addEventListener('click', () => {
-      const page = nav.getAttribute('data-page');
-      setActivePage(page);
-    });
-  });
-
-  // inisialisasi
-  setActivePage("story");
-  // tambahkan initial XP agar menarik
-  addXP(0); // refresh UI
-</script>
+  <div style="text-align: center; margin-top: 52px; color: #6B4A2A; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.3px;">
+    🍃 Jejak Loka — Desain modern, earth tone, ornamen halus Nusantara | Gamifikasi & estetik untuk Generasi Z
+  </div>
+</div>
 </body>
 </html>
