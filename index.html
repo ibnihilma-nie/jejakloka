@@ -3,479 +3,578 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Jejak Loka - App</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Javanese&family=Noto+Sans+Balinese&display=swap" rel="stylesheet">
+  <title>Jejak Loka - Belajar Aksara Nusantara</title>
   <style>
-    :root {
-      --primary: #8B5A2B;
-      --secondary: #D4A373;
-      --accent: #6B8E6B;
-      --bg-light: #FDF8F0;
-      --surface: #FFFFFF;
-      --text-dark: #3E2723;
-      --text-light: #8D6E63;
-      --nav-bg: rgba(255, 255, 255, 0.9);
-      --shadow: 0 10px 25px -5px rgba(139, 90, 43, 0.15);
-      --safe-bottom: env(safe-area-inset-bottom);
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background: #E7DCC8;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #E7DCC8; /* warm earthy background */
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      color: var(--text-dark);
+      padding: 16px;
     }
 
-    /* Mobile Frame */
-    .app-frame {
+    /* Mobile container */
+    .app-container {
+      max-width: 400px;
       width: 100%;
-      max-width: 414px;
-      height: 100vh;
-      max-height: 896px;
-      background: var(--bg-light);
-      position: relative;
+      height: 700px;
+      background: #FDF8F0; /* krem lembut */
+      border-radius: 48px 48px 32px 32px;
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.3);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 50px 100px -20px rgba(0,0,0,0.3);
+      position: relative;
+      backdrop-filter: blur(0px);
+      transition: all 0.2s ease;
     }
 
-    @media (min-width: 415px) {
-      .app-frame {
-        border-radius: 40px;
-        height: 85vh;
-        border: 10px solid #222;
-      }
+    /* Ornamen halus di background */
+    .app-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' opacity='0.08'%3E%3Cpath fill='%238B5A2B' d='M20,20 L30,15 L40,20 L35,30 L25,30 Z M70,70 L80,65 L90,70 L85,80 L75,80 Z'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      pointer-events: none;
     }
 
-    /* Status Bar Simulation */
-    .status-bar {
-      padding: 12px 24px;
+    /* Header */
+    .header {
+      padding: 20px 24px 8px 24px;
       display: flex;
       justify-content: space-between;
-      font-size: 0.75rem;
+      align-items: baseline;
+      border-bottom: 1px solid rgba(139, 90, 43, 0.15);
+    }
+    .logo h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.6rem;
       font-weight: 700;
-      background: var(--bg-light);
-      z-index: 100;
-    }
-
-    /* Header Navigation */
-    header {
-      padding: 10px 24px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--bg-light);
-      z-index: 90;
-    }
-
-    .brand h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(135deg, #8B5A2B, #D4A373);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
     }
-
-    .xp-badge {
-      background: white;
-      padding: 8px 14px;
+    .logo p {
+      font-size: 0.7rem;
+      color: #8B5A2B;
+      opacity: 0.7;
+    }
+    .xp-bar-small {
+      background: #E3B7A0;
       border-radius: 20px;
-      box-shadow: var(--shadow);
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #5E3A1C;
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      border: 1px solid rgba(139, 90, 43, 0.1);
     }
 
-    /* Scrollable Content */
-    .view-container {
+    /* Main content scroll */
+    .main-content {
       flex: 1;
       overflow-y: auto;
-      padding: 0 20px 120px; /* Space for nav */
-      scrollbar-width: none;
+      padding: 20px 20px 8px 20px;
       scroll-behavior: smooth;
     }
-    .view-container::-webkit-scrollbar { display: none; }
 
-    /* Cards */
-    .card {
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      transition: transform 0.2s;
-    }
-
-    .card:active { transform: scale(0.98); }
-
-    /* Adventure Page */
-    .map-scroller {
-      display: flex;
-      gap: 15px;
-      overflow-x: auto;
-      padding: 10px 0;
-      scrollbar-width: none;
-    }
-    .map-scroller::-webkit-scrollbar { display: none; }
-
-    .island-node {
-      min-width: 140px;
-      height: 180px;
-      background: white;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .island-node.locked { opacity: 0.6; filter: grayscale(1); }
-    .island-node.locked::after { content: "🔒"; position: absolute; top: 10px; right: 10px; font-size: 0.8rem; }
-    .island-node .icon { font-size: 3rem; }
-
-    /* Daily Page */
-    .hero-banner {
-      background: linear-gradient(145deg, #8B5A2B, #5D3A1A);
-      color: white;
-      border-radius: 30px;
-      padding: 30px 20px;
-      text-align: center;
-      margin-bottom: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-banner::before {
-      content: "ꦤꦸꦱꦤ꧀ꦠꦫ";
-      position: absolute;
-      font-size: 6rem;
-      opacity: 0.05;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Noto Sans Javanese';
-    }
-
-    /* Keyboard UI */
-    .keyboard-preview {
-      background: #F5EFE6;
-      border-radius: 20px;
-      min-height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      font-family: 'Noto Sans Javanese';
-      margin: 15px 0;
-      padding: 20px;
-      text-align: center;
-      color: var(--primary);
-    }
-
-    textarea {
-      width: 100%;
-      border: 2px solid #EEDCC8;
-      border-radius: 15px;
-      padding: 15px;
-      font-family: inherit;
-      font-size: 1rem;
-      outline: none;
-      background: white;
-    }
-
-    /* Bottom Navigation App Bar */
-    .tab-bar {
-      position: absolute;
-      bottom: 25px;
-      left: 20px;
-      right: 20px;
-      height: 75px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      border-radius: 25px;
+    /* Bottom navigation */
+    .bottom-nav {
+      background: #FFFBF5;
+      border-top: 1px solid #F0E4D0;
       display: flex;
       justify-content: space-around;
-      align-items: center;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      border: 1px solid rgba(255,255,255,0.4);
-      z-index: 1000;
+      padding: 10px 16px 20px;
+      border-radius: 28px 28px 0 0;
     }
-
-    .tab-item {
+    .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: var(--secondary);
-      font-size: 0.65rem;
-      font-weight: 700;
       gap: 4px;
+      font-size: 0.7rem;
+      color: #B8956E;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+    .nav-item.active {
+      color: #8B5A2B;
+      transform: translateY(-2px);
+    }
+    .nav-item span:first-child {
+      font-size: 1.5rem;
     }
 
-    .tab-item span { font-size: 1.6rem; transition: transform 0.3s; }
-    .tab-item.active { color: var(--primary); }
-    .tab-item.active span { transform: translateY(-8px) scale(1.2); }
-
-    /* Button */
-    .btn-main {
+    /* Cards & UI Elements */
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+      border: 1px solid #F2E5D6;
+    }
+    .map-preview {
+      background: #F7F0E6;
+      border-radius: 20px;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .island {
+      background: #D4A373;
+      padding: 8px 12px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+    .island.locked {
+      background: #C0B2A0;
+      opacity: 0.6;
+    }
+    .dialog-box {
+      background: #FEF5E8;
+      border-radius: 24px;
+      padding: 16px;
+      margin: 12px 0;
+      border-left: 6px solid #D4A373;
+    }
+    .choice-btn {
+      background: #EBDCCB;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 40px;
+      margin: 8px 8px 0 0;
+      font-weight: 500;
+      color: #5E3A1C;
+    }
+    .daily-bg {
+      background: linear-gradient(145deg, #FFE8D4, #FFD9B5);
+      border-radius: 32px;
+      padding: 24px;
+      text-align: center;
+    }
+    .aksara-besar {
+      font-size: 3.8rem;
+      font-family: 'Noto Sans Javanese', 'Noto Sans Balinese', sans-serif;
+      letter-spacing: 8px;
+    }
+    .keyboard-area {
+      background: #F5EDE2;
+      border-radius: 28px;
+      padding: 16px;
+    }
+    .key-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+      justify-content: center;
+    }
+    .key-btn {
+      background: #FFF;
+      border: 1px solid #DECBB4;
+      padding: 12px 14px;
+      border-radius: 18px;
+      font-weight: 600;
+      color: #6B4A2A;
+      cursor: pointer;
+      transition: 0.05s linear;
+    }
+    .key-btn:active { transform: scale(0.96); background: #EBDCCB; }
+    textarea {
       width: 100%;
-      background: var(--primary);
+      border-radius: 24px;
+      border: 1px solid #E2D3C0;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 1rem;
+      background: white;
+    }
+    .badge-list {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: #EEDCC8;
+      border-radius: 60px;
+      padding: 6px 14px;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+    button {
+      background: #8B5A2B;
       color: white;
       border: none;
-      padding: 16px;
-      border-radius: 18px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
+      padding: 10px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+    }
+    .avatar {
+      width: 70px;
+      height: 70px;
+      background: #D4A373;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: 0 8px 20px -6px var(--primary);
-    }
-
-    /* Animations */
-    .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Progress */
-    .progress-track {
-      width: 100%;
-      height: 8px;
-      background: #EEDCC8;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 10px 0;
+      font-size: 2.5rem;
     }
     .progress-bar {
+      background: #EED7C0;
+      border-radius: 20px;
+      height: 12px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: #6B8E6B;
+      width: 0%;
       height: 100%;
-      background: var(--accent);
-      transition: width 0.6s ease;
+      border-radius: 20px;
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div class="app-frame">
-  <!-- Status Bar -->
-  <div class="status-bar">
-    <span>9:41</span>
-    <div style="display:flex; gap:6px;">
-      <span>📶</span><span>🔋</span>
+<div class="app-container" id="app">
+  <div class="header">
+    <div class="logo">
+      <h1>Jejak Loka</h1>
+      <p>lestari aksara, jelajahi budaya</p>
     </div>
+    <div class="xp-bar-small" id="xpHeader">⭐ 0 XP | Lv.1</div>
   </div>
 
-  <!-- Header -->
-  <header>
-    <div class="brand">
-      <h1>Jejak Loka</h1>
-    </div>
-    <div class="xp-badge">
-      <span>⭐</span> <span id="xpDisplay">120</span>
-    </div>
-  </header>
+  <div class="main-content" id="mainContent">
+    <!-- konten dinamis via js -->
+  </div>
 
-  <!-- Content Container -->
-  <main class="view-container" id="mainView">
-    <!-- Konten halaman dimuat di sini -->
-  </main>
-
-  <!-- Bottom Navigation Tab Bar -->
-  <nav class="tab-bar">
-    <div class="tab-item active" onclick="switchTab('adventure', this)">
-      <span>🌏</span>Petualangan
-    </div>
-    <div class="tab-item" onclick="switchTab('daily', this)">
-      <span>📖</span>Harian
-    </div>
-    <div class="tab-item" onclick="switchTab('aksara', this)">
-      <span>⌨️</span>Aksara
-    </div>
-    <div class="tab-item" onclick="switchTab('profile', this)">
-      <span>👤</span>Profil
-    </div>
-  </nav>
+  <div class="bottom-nav">
+    <div class="nav-item" data-page="story">🌏<span>Petualangan</span></div>
+    <div class="nav-item" data-page="daily">📖<span>Kata Harian</span></div>
+    <div class="nav-item" data-page="keyboard">⌨️<span>Aksara</span></div>
+    <div class="nav-item" data-page="dictionary">📚<span>Kamus</span></div>
+    <div class="nav-item" data-page="profile">👤<span>Profil</span></div>
+  </div>
 </div>
 
 <script>
-  // -- App State --
-  let userXP = 120;
-  let currentTab = 'adventure';
-
-  // -- Page Content Templates --
-  const pages = {
-    adventure: `
-      <div class="fade-in">
-        <h2 style="margin-bottom:15px; font-size:1.2rem;">Lanjutkan Perjalanan</h2>
-        <div class="map-scroller">
-          <div class="island-node" onclick="alert('Membuka Sumatra...')">
-            <span class="icon">🏝️</span>
-            <b style="font-size:0.9rem">Sumatra</b>
-            <span style="font-size:0.7rem; color:var(--accent); font-weight:700">75% Selesai</span>
-          </div>
-          <div class="island-node locked">
-            <span class="icon">🌋</span>
-            <b style="font-size:0.9rem">Jawa</b>
-            <span style="font-size:0.7rem">Level 5 Butuh</span>
-          </div>
-          <div class="island-node locked">
-            <span class="icon">🌊</span>
-            <b style="font-size:0.9rem">Bali</b>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:25px;">
-          <h3>Misi Harian</h3>
-          <p style="font-size:0.85rem; color:var(--text-light); margin:8px 0">Pelajari 3 kata baru tentang alam hari ini.</p>
-          <div class="progress-track">
-            <div class="progress-bar" style="width: 33%"></div>
-          </div>
-          <div style="display:flex; justify-content:space-between; font-size:0.75rem; font-weight:700;">
-            <span>Progres: 1/3</span>
-            <span style="color:var(--primary)">+50 XP</span>
-          </div>
-        </div>
-      </div>
-    `,
-    daily: `
-      <div class="fade-in">
-        <div class="hero-banner">
-          <p style="font-size:0.7rem; letter-spacing:2px; font-weight:700;">KATA HARI INI</p>
-          <div style="font-size:3.5rem; margin:15px 0; font-family:'Noto Sans Javanese'">ꦧꦸꦩꦶ</div>
-          <h2 style="font-size:1.8rem">Bumi</h2>
-          <p style="margin-top:8px; opacity:0.8">Tanah air tempat berpijak</p>
-        </div>
-        
-        <div class="card">
-          <p style="line-height:1.6; color:var(--text-light); font-style:italic">"Aksara adalah cermin jiwa suatu bangsa. Mempelajarinya berarti menghargai bumi tempat kita berdiri."</p>
-          <button class="btn-main" style="margin-top:20px" onclick="gainXP(20)">
-            Bagikan ke Cerita (+20 XP)
-          </button>
-        </div>
-      </div>
-    `,
-    aksara: `
-      <div class="fade-in">
-        <div class="card">
-          <h3 style="margin-bottom:15px">Generator Aksara</h3>
-          <textarea id="latinInput" placeholder="Ketik latin... (contoh: halo)" oninput="convertText()"></textarea>
-          <div class="keyboard-preview" id="aksaraOut">...</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
-            <button class="btn-main" style="background:#fff; color:var(--primary); border:1px solid #EEDCC8" onclick="copyAksara()">Salin</button>
-            <button class="btn-main" onclick="gainXP(5)">Simpan</button>
-          </div>
-        </div>
-      </div>
-    `,
-    profile: `
-      <div class="fade-in" style="text-align:center">
-        <div style="width:100px; height:100px; background:var(--secondary); border-radius:50%; margin:0 auto 15px; border:4px solid white; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center; font-size:3rem">🧑🎨</div>
-        <h2>Satriya Aksara</h2>
-        <p style="color:var(--text-light); font-size:0.85rem">Level 3 • Pengembara</p>
-        
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin:25px 0">
-          <div class="card" style="padding:15px 10px; margin:0">
-            <b style="font-size:1.1rem; color:var(--primary)">12</b>
-            <p style="font-size:0.6rem; font-weight:700">BADGE</p>
-          </div>
-          <div class="card" style="padding:15px 10px; margin:0">
-            <b style="font-size:1.1rem; color:var(--primary)">5</b>
-            <p style="font-size:0.6rem; font-weight:700">STREAK</p>
-          </div>
-          <div class="card" style="padding:15px 10px; margin:0">
-            <b style="font-size:1.1rem; color:var(--primary)">1.2k</b>
-            <p style="font-size:0.6rem; font-weight:700">TOTAL XP</p>
-          </div>
-        </div>
-
-        <div class="card" style="text-align:left">
-          <h3 style="font-size:0.9rem">Pencapaian Baru</h3>
-          <div style="display:flex; gap:10px; margin-top:10px">
-            <span title="Penjaga Budaya">🎖️</span>
-            <span title="Pembelajar Cepat">🚀</span>
-            <span title="Pecinta Sejarah">📜</span>
-          </div>
-        </div>
-      </div>
-    `
+  // ---------- GAME STATE ----------
+  let user = {
+    xp: 0,
+    level: 1,
+    unlockedStories: ["sumatra"],
+    badges: ["Penjelajah Pemula"],
+    avatar: "🧑🎨",
+    dailyStreak: 1,
+    learnedWords: ["aksara", "bumi", "candi"]
   };
 
-  // -- Functions --
-  function switchTab(tab, el) {
-    currentTab = tab;
-    // Update Nav UI
-    document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
-    el.classList.add('active');
-    
-    // Render View
-    document.getElementById('mainView').innerHTML = pages[tab];
-    
-    // Smooth scroll to top
-    document.querySelector('.view-container').scrollTop = 0;
-  }
+  // contoh kamus data
+  const dictionaryData = [
+    { word: "Aksara", latin: "Aksara", aksara: "ꦲꦏ꧀ꦱꦫ", arti: "Sistem tulisan tradisional", example: "Aksara Jawa digunakan di masa lalu." },
+    { word: "Bumi", latin: "Bumi", aksara: "ꦧꦸꦩꦶ", arti: "Tanah, dunia", example: "Bumi Nusantara kaya budaya." },
+    { word: "Candi", latin: "Candi", aksara: "ꦕꦤ꧀ꦢꦶ", arti: "Bangunan bersejarah", example: "Candi Borobudur megah." },
+    { word: "Ratu", latin: "Ratu", aksara: "ꦫꦠꦸ", arti: "Raja perempuan", example: "Ratu Kencono wungu." },
+    { word: "Pustaka", latin: "Pustaka", aksara: "ꦥꦸꦱ꧀ꦠꦏ", arti: "Buku atau kitab", example: "Pustaka lontar berisi aksara." }
+  ];
 
-  function convertText() {
-    const input = document.getElementById('latinInput').value.toLowerCase();
-    const map = {'a':'ꦲ','b':'ꦧ','c':'ꦕ','d':'ꦢ','e':'ꦌ','g':'ꦒ','h':'ꦲ','i':'ꦆ','j':'ꦗ','k':'ꦏ','l':'ꦭ','m':'ꦩ','n':'ꦤ','o':'ꦎ','p':'ꦥ','r':'ꦫ','s':'ꦱ','t':'ꦠ','u':'ꦈ','w':'ꦮ','y':'ꦪ'};
+  // mapping konversi latin ke aksara jawa sederhana (demo)
+  const latinToAksaraMap = {
+    'a':'ꦲ', 'b':'ꦧ', 'c':'ꦕ', 'd':'ꦢ', 'e':'ꦌ', 'f':'ꦥ꦳', 'g':'ꦒ', 'h':'ꦲ', 'i':'ꦆ', 'j':'ꦗ', 'k':'ꦏ', 'l':'ꦭ', 'm':'ꦩ', 'n':'ꦤ', 'o':'ꦎ', 'p':'ꦥ', 'q':'ꦏ', 'r':'ꦫ', 's':'ꦱ', 't':'ꦠ', 'u':'ꦈ', 'v':'ꦮ꦳', 'w':'ꦮ', 'x':'ꦏ꧀ꦱ', 'y':'ꦪ', 'z':'ꦗ'
+  };
+  function convertToAksara(text) {
     let result = "";
-    for(let c of input) result += map[c] || c;
-    document.getElementById('aksaraOut').innerText = result || "...";
+    for(let char of text.toLowerCase()) {
+      if(latinToAksaraMap[char]) result += latinToAksaraMap[char];
+      else result += char;
+    }
+    return result;
   }
 
-  function gainXP(amount) {
-    userXP += amount;
-    document.getElementById('xpDisplay').innerText = userXP;
-    
-    // Toast Notification
-    const toast = document.createElement('div');
-    toast.innerHTML = `<b>+${amount} XP</b> Berhasil didapatkan! ✨`;
-    toast.style = `position:fixed; top:80px; left:50%; transform:translateX(-50%); background:var(--text-dark); color:white; padding:10px 20px; border-radius:30px; font-size:0.8rem; z-index:2000; box-shadow:0 10px 20px rgba(0,0,0,0.2); animation: toastAnim 2s forwards;`;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 2000);
+  // fungsi untuk menambah XP dan update level
+  function addXP(amount) {
+    user.xp += amount;
+    let newLevel = Math.floor(user.xp / 500) + 1;
+    if(newLevel > user.level) {
+      user.level = newLevel;
+      alert(`✨ Selamat! Level naik ke ${user.level} ✨`);
+      if(user.level === 3 && !user.badges.includes("Penjaga Aksara")) {
+        user.badges.push("Penjaga Aksara");
+        alert("🏅 Badge baru: Penjaga Aksara!");
+      }
+    }
+    user.level = newLevel;
+    updateUI();
   }
 
-  function copyAksara() {
-    const text = document.getElementById('aksaraOut').innerText;
-    navigator.clipboard.writeText(text);
-    gainXP(10);
+  function updateUI() {
+    document.getElementById("xpHeader").innerHTML = `⭐ ${user.xp} XP | Lv.${user.level}`;
+    renderCurrentPage();
   }
 
-  // Initialize
-  window.onload = () => switchTab('adventure', document.querySelector('.tab-item'));
+  // state halaman aktif
+  let currentPage = "story";
 
+  // ----- RENDER SETIAP HALAMAN -----
+  function renderStory() {
+    return `
+      <div class="card">
+        <h3 style="color:#8B5A2B">🌏 Peta Nusantara</h3>
+        <div class="map-preview">
+          <div class="island" data-story="sumatra">Sumatra ✅</div>
+          <div class="island locked" data-story="java">Jawa 🔒</div>
+          <div class="island locked" data-story="bali">Bali 🔒</div>
+        </div>
+        <div id="storyDialog" class="dialog-box">
+          <p><strong>📜 Cerita Rakyat Sumatra: Malin Kundang</strong></p>
+          <p>Ibu Malin Kundang menangis melihat anaknya durhaka. Tiba-tiba badai datang. Apa yang akan kamu lakukan sebagai penolong?</p>
+          <button class="choice-btn" data-choice="1">🔮 Menolong Ibu dengan aksara suci</button>
+          <button class="choice-btn" data-choice="2">🌊 Berlari menghindari badai</button>
+        </div>
+        <p>✨ Progress: <strong>Sumatra (level 1/5)</strong></p>
+        <div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div>
+      </div>
+    `;
+  }
+
+  function handleStoryChoice(choice) {
+    if(choice === "1") {
+      addXP(80);
+      alert("✅ Pilihan bijak! Kamu mendapat 80 XP dan aksara 'Ba' dibuka.");
+      user.badges.push("Pemurah Hati");
+    } else {
+      addXP(20);
+      alert("😔 Kurang tepat, tapi kamu tetap belajar 20 XP.");
+    }
+    renderCurrentPage();
+  }
+
+  function renderDaily() {
+    const words = ["Rindu", "Bahagia", "Asri", "Loka"];
+    const randomWord = words[Math.floor(Math.random()*words.length)];
+    const aksaraEx = convertToAksara(randomWord);
+    return `
+      <div class="daily-bg" style="background:linear-gradient(125deg,#FDE5C2,#F7D9B0);">
+        <p style="letter-spacing:2px; color:#7C5633;">✨ KATA HARI INI ✨</p>
+        <div class="aksara-besar" style="font-size:3rem; margin:12px 0">${aksaraEx}</div>
+        <h2 style="color:#6B4A2A;">${randomWord}</h2>
+        <p style="font-style:italic; margin:12px 0">“${randomWord} adalah napas yang menghidupkan aksara.”</p>
+        <button id="shareDailyBtn" style="background:#8B5A2B; margin-top:8px;">📤 Bagikan ke Medsos</button>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <p>🌤️ Latar: senja di pulau Jawa. Sentuhan budaya menenangkan jiwa.</p>
+      </div>
+    `;
+  }
+
+  function renderKeyboard() {
+    return `
+      <div class="keyboard-area">
+        <h3>⌨️ Keyboard Aksara (demo konversi)</h3>
+        <textarea id="inputLatin" rows="3" placeholder="Ketik latin... contoh: halo nusantara"></textarea>
+        <div class="key-row">
+          ${['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'].map(l => `<div class="key-btn" data-char="${l}">${l}</div>`).join('')}
+        </div>
+        <div>
+          <p><strong>Hasil Aksara:</strong></p>
+          <div id="aksaraOutput" style="background:white; border-radius:20px; padding:12px; font-size:1.8rem; font-family: 'Noto Sans Javanese'; min-height:70px;"></div>
+        </div>
+        <button id="copyAksaraBtn" style="margin-top:12px;">📋 Salin Aksara</button>
+        <p style="font-size:12px; margin-top:12px;">✨ Setiap menekan tombol huruf atau mengetik akan otomatis konversi.</p>
+      </div>
+    `;
+  }
+
+  function attachKeyboardEvents() {
+    const input = document.getElementById('inputLatin');
+    const outputDiv = document.getElementById('aksaraOutput');
+    function updateConvert() {
+      if(input) {
+        let val = input.value;
+        outputDiv.innerText = convertToAksara(val) || "ᬓᭂᬢᬶᬓ᭄...";
+        // tambah XP sedikit saat mengetik (dibatasi)
+      }
+    }
+    if(input) {
+      input.addEventListener('input', updateConvert);
+      updateConvert();
+    }
+    document.querySelectorAll('.key-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        let char = btn.getAttribute('data-char');
+        if(input) {
+          input.value += char;
+          updateConvert();
+          addXP(1); // tiap klik tombol mendapat 1 XP
+        }
+      });
+    });
+    const copyBtn = document.getElementById('copyAksaraBtn');
+    if(copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const aksaraText = document.getElementById('aksaraOutput').innerText;
+        navigator.clipboard.writeText(aksaraText);
+        alert("Aksara tersalin! Bagikan ke media sosialmu ✨");
+        addXP(5);
+      });
+    }
+  }
+
+  function renderDictionary() {
+    return `
+      <div class="card">
+        <input type="text" id="searchDict" placeholder="🔍 Cari kata (contoh: candi, aksara)" style="width:100%; padding:12px; border-radius:30px; border:1px solid #E2D3C0;">
+        <div id="dictResults" style="margin-top:16px;">
+          ${dictionaryData.map(item => `
+            <div style="background:#FFF7EF; border-radius:24px; margin-bottom:12px; padding:12px;">
+              <div style="font-size:2rem; font-family: monospace;">${item.aksara}</div>
+              <b>${item.word}</b> - ${item.arti}<br>
+              <span style="font-size:13px;">📖 ${item.example}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  function attachDictionarySearch() {
+    const searchInput = document.getElementById('searchDict');
+    if(searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = dictionaryData.filter(item => item.word.toLowerCase().includes(term) || item.arti.toLowerCase().includes(term));
+        const container = document.getElementById('dictResults');
+        if(container) {
+          container.innerHTML = filtered.map(item => `
+            <div style="background:#FFF7EF; border-radius:24px; margin-bottom:12px; padding:12px;">
+              <div style="font-size:2rem;">${item.aksara}</div>
+              <b>${item.word}</b> - ${item.arti}<br>
+              <span>📖 ${item.example}</span>
+            </div>
+          `).join('');
+          if(filtered.length === 0) container.innerHTML = "<p>Tidak ditemukan, coba kata lain.</p>";
+        }
+      });
+    }
+  }
+
+  function renderProfile() {
+    const xpNeeded = (user.level * 500) - user.xp;
+    const progressPercent = (user.xp % 500) / 500 * 100;
+    return `
+      <div class="card" style="text-align:center;">
+        <div class="avatar" style="margin:0 auto;">${user.avatar}</div>
+        <h3>Pejuang Aksara</h3>
+        <p>Level ${user.level} • ${user.xp} / ${user.level*500} XP</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:${progressPercent}%"></div></div>
+        <p style="margin-top:12px;">🎖️ Badge:</p>
+        <div class="badge-list">
+          ${user.badges.map(b => `<span class="badge">🏅 ${b}</span>`).join('')}
+        </div>
+        <hr style="margin:16px 0">
+        <p>📖 Kata dikuasai: ${user.learnedWords.length} kata</p>
+        <p>🔥 Streak harian: ${user.dailyStreak} hari</p>
+        <button id="resetStreakBtn" style="background:#C2A27F;">Klaim hadiah harian</button>
+      </div>
+    `;
+  }
+
+  function attachProfileEvents() {
+    const resetBtn = document.getElementById('resetStreakBtn');
+    if(resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        addXP(30);
+        user.dailyStreak++;
+        alert(`Streak +1 hari! Dapat 30 XP. Total streak: ${user.dailyStreak}`);
+        renderCurrentPage();
+      });
+    }
+  }
+
+  // Global render
+  function renderCurrentPage() {
+    const contentDiv = document.getElementById("mainContent");
+    if(currentPage === "story") {
+      contentDiv.innerHTML = renderStory();
+      // attach event untuk pilihan cerita
+      document.querySelectorAll('.choice-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const choice = btn.getAttribute('data-choice');
+          handleStoryChoice(choice);
+        });
+      });
+      // tombol pulau
+      document.querySelectorAll('.island[data-story]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          if(el.classList.contains('locked')) alert("Selesaikan Sumatra dulu untuk membuka pulau berikutnya!");
+          else alert("Kamu sudah menjelajahi Sumatra. Cerita selanjutnya segera hadir!");
+        });
+      });
+    } 
+    else if(currentPage === "daily") {
+      contentDiv.innerHTML = renderDaily();
+      const shareBtn = document.getElementById('shareDailyBtn');
+      if(shareBtn) shareBtn.onclick = () => { alert("✨ Kartu aksara siap dibagikan ke Instagram/TikTok! +15 XP"); addXP(15); };
+    }
+    else if(currentPage === "keyboard") {
+      contentDiv.innerHTML = renderKeyboard();
+      attachKeyboardEvents();
+    }
+    else if(currentPage === "dictionary") {
+      contentDiv.innerHTML = renderDictionary();
+      attachDictionarySearch();
+    }
+    else if(currentPage === "profile") {
+      contentDiv.innerHTML = renderProfile();
+      attachProfileEvents();
+    }
+  }
+
+  // navigasi
+  function setActivePage(page) {
+    currentPage = page;
+    document.querySelectorAll('.nav-item').forEach(item => {
+      if(item.getAttribute('data-page') === page) item.classList.add('active');
+      else item.classList.remove('active');
+    });
+    renderCurrentPage();
+  }
+
+  // event nav
+  document.querySelectorAll('.nav-item').forEach(nav => {
+    nav.addEventListener('click', () => {
+      const page = nav.getAttribute('data-page');
+      setActivePage(page);
+    });
+  });
+
+  // inisialisasi
+  setActivePage("story");
+  // tambahkan initial XP agar menarik
+  addXP(0); // refresh UI
 </script>
-
-<style>
-  @keyframes toastAnim {
-    0% { opacity:0; transform:translateX(-50%) translateY(20px); }
-    15% { opacity:1; transform:translateX(-50%) translateY(0); }
-    85% { opacity:1; transform:translateX(-50%) translateY(0); }
-    100% { opacity:0; transform:translateX(-50%) translateY(-20px); }
-  }
-</style>
-
 </body>
 </html>
